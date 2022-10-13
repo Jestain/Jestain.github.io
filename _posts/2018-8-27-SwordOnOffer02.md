@@ -27,26 +27,24 @@ author: mio4
 
 
 ```java
-public class Solution {
-    public String replaceSpace(StringBuffer str) {
-    	StringBuffer after = new StringBuffer();
-		int len = str.length();
-		for(int i=0; i < len; i++){
-			if(str.charAt(i) == ' ') {
-				after.append("%20");
-			} else {
-				after.append(str.charAt(i));
-			}
-		}
-		return after.toString();
-    }
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int[] dp=new int[nums.length];
+        dp[0]=nums[0];
+        int max=dp[0];
+        for(int i=1;i<nums.length;i++){
+            dp[i]=Math.max(dp[i-1]+nums[i],nums[i]);
+            max=Math.max(max,dp[i]);
+        }
+        return max;
+    }
 }
 ```
 
  - 看了别人的解答之后发现Java库中的replaceAll()函数能够一行代码解决问题：
 
 
-```java 
+```java
 public class Solution {
     public String replaceSpace(StringBuffer str) {
     	return str.toString().replaceAll(" ","%20");
